@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.unephem.arwise.app_arwise">
    <application
-        android:label="app_arwise"
-        android:name="ARWISE"
+        android:label="Arwise"
+        android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
