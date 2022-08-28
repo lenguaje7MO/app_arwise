@@ -1,8 +1,8 @@
 import 'package:app_arwise/src/ui/pages/activity_page.dart';
+import 'package:app_arwise/src/ui/pages/language_page.dart';
 import 'package:app_arwise/src/ui/utils/urls.dart';
 import 'package:app_arwise/src/ui/utils/utilities.dart';
 import 'package:flutter/material.dart';
-
 
 class HomePage extends StatefulWidget {
   const HomePage();
@@ -13,13 +13,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Widget portada() {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.40,
-      margin: const EdgeInsets.only(left: 60, right: 60, bottom: 60),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.white, width: 1),
-      ),
-      child: Image.asset('assets/img/portada.png', fit: BoxFit.cover),
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.90,
+      child: Image.asset('assets/img/fondo_principal.png', fit: BoxFit.fill),
     );
   }
 
@@ -53,34 +49,40 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xFFedd8c9),
-        body: Stack(
-          children: [
-            Image.asset(
-              'assets/img/fondo1.png',
-              width: double.infinity,
-              height: double.infinity,
-              fit: BoxFit.fill,
-            ),
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  portada(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      btnContenido(),
-                      btnActividades()
-                    ],
-                  )
-                ],
-              ),
-            ),
-          ],
-        ));
+      backgroundColor: Colors.black,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Stack(
+            children: [
+               portada(),
+               Positioned(
+                left: MediaQuery.of(context).size.width * 0.22,
+                right: MediaQuery.of(context).size.width * 0.40,
+                bottom: MediaQuery.of(context).size.height * 0.10,
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const LanguagePage()),
+                      );
+                    }, 
+                    child: const Text('START'),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        side: const BorderSide(width: 3.0, color: Colors.black),
+                      ),
+                    primary: Color.fromARGB(255, 45, 111, 94),
+                    textStyle: const TextStyle(fontWeight: FontWeight.bold,fontSize: 25)
+                    ),
+                  ),
+                )
+            ],
+          )
+        ],
+      ),
+    );
   }
-
-
 }
