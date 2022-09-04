@@ -1,4 +1,3 @@
-import 'package:app_arwise/src/ui/pages/activity_page.dart';
 import 'package:app_arwise/src/ui/pages/destreza1_page.dart';
 import 'package:flutter/material.dart';
 
