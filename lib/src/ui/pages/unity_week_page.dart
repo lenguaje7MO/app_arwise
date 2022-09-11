@@ -106,14 +106,15 @@ class _UnityWeekPageState extends State<UnityWeekPage> {
               children: [
                 Container(
                 margin: const EdgeInsets.symmetric(vertical: 10),
-                height: 120,
-                width: 120,
+                height: 160,
+                width: 160,
                 child: Image.asset('assets/img/logos/logo6.png',
                   fit: BoxFit.fill),
                 ),
-                const Text('UNIDAD 1',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24)),
-                const Text('SEMANA 1',style: TextStyle(fontSize: 18)),
-                const SizedBox(height:10),
+                
+                const Text('UNIDAD 1',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30)),
+                const Text('SEMANA 1',style: TextStyle(fontSize: 30)),
+                const SizedBox(height:40),
                 SizedBox(
                 width: 180,
                 child:ElevatedButton(
@@ -139,7 +140,7 @@ class _UnityWeekPageState extends State<UnityWeekPage> {
                     textStyle: const TextStyle(
                       fontWeight: FontWeight.bold, fontSize: 20)),
                   )),
-                SizedBox(height:10),
+                const SizedBox(height:40),
                 SizedBox(
                 width: 180,
                 child:ElevatedButton(
@@ -188,7 +189,32 @@ class _UnityWeekPageState extends State<UnityWeekPage> {
             left: 10,
             child: const Icon(Icons.brightness_1, color: Colors.yellow),
           ),
-
+          Positioned(
+            bottom: 100,
+            left: 0,
+            right: 0,
+            child:Center(
+            child:SizedBox(
+              height: 50,
+              width: 150,
+              child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('BACK <'),
+                    style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                          side: const BorderSide(
+                             width: 4.0, color: Colors.black),
+                        ),
+                        primary: const Color(0xfffcd24f),
+                        onPrimary: Colors.black,
+                        textStyle: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20)),
+            ),
+            ))
+          )
         ],
       ),
     );

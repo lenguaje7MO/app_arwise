@@ -63,34 +63,38 @@ class _UnityDescPageState extends State<UnityDescPage> {
             left: 0,
             child: SizedBox(
               width: MediaQuery.of(context).size.width * 1,
-              height: MediaQuery.of(context).size.height * 0.50,
+              height: MediaQuery.of(context).size.height * 0.60,
               child: Column(
-                children: [
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [ 
                   Card(
                     elevation: 10,
                     child: Padding(
                       padding: const EdgeInsets.only(
-                          left: 80, right: 80, top: 5, bottom: 5),
+                          left: 50, right: 50, top: 5, bottom: 5),
                       child: Text('UNIDAD ${widget.idUnity}',
                           style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18)),
+                              fontWeight: FontWeight.bold, fontSize: 35)),
                     ),
                   ),
+                  
                   Padding(
                     padding: const EdgeInsets.only(
-                        left: 80, right: 80, top: 5, bottom: 40),
+                        left: 10, right: 10, top: 10, bottom:30),
                     child: Column(
                       children: [
                         Text(widget.title,
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 30,
+                                fontSize: 45,
                                 color: Colors.white),
                             textAlign: TextAlign.center),
                       ],
                     ),
                   ),
-                  RichText(
+                  Padding(
+                    padding:const EdgeInsets.only(left: 40,right: 40) ,
+                    child: RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
                       children: <TextSpan>[
@@ -98,14 +102,15 @@ class _UnityDescPageState extends State<UnityDescPage> {
                             text: 'Destreza: ',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                                fontSize: 25,
                                 color: Colors.black)),
                         TextSpan(
                             text: widget.description,
                             style: const TextStyle(
-                                color: Colors.black, fontSize: 16)),
+                                color: Colors.black, fontSize: 25)),
                       ],
                     ),
+                  )
                   )
                 ],
               ),

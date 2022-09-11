@@ -29,19 +29,19 @@ class _PresentationDetailPageState extends State<PresentationDetailPage> {
                 Column(
                   children: const [
                     Text('BIENVENIDOS A',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
+                        style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25)),
                     Text(' "ARWISE" ',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
+                        style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25)),
                     Text(''),
-                    Text('Dirigido a los Alumnos del'),
-                    Text('7mo EGB "B"'),
-                    Text('Unidad Educativa Particular'),
-                    Text('"Hermano Miguel"'),
+                    Text('Dirigido a los Alumnos del',style: TextStyle(fontSize: 20)),
+                    Text('7mo EGB "B"',style: TextStyle(fontSize: 20)),
+                    Text('Unidad Educativa Particular',style: TextStyle(fontSize: 20)),
+                    Text('"Hermano Miguel"',style: TextStyle(fontSize: 20)),
                   ],
                 ),
                 SizedBox(
-                  height: 150,
-                  width: 150,
+                  height: 180,
+                  width: 180,
                   child: Image.asset('assets/img/logos/logo5.png'),
                 ),
                 Container(
@@ -51,11 +51,11 @@ class _PresentationDetailPageState extends State<PresentationDetailPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
                       Text('CREADORES:',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
+                          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20)),
                       Text('PEÑAFIEL VALERIA',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      Text('RICO ELENA',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
+                          style: TextStyle(fontSize: 20)),
+                      Text('RICO ELIANA',
+                          style: TextStyle(fontSize: 20)),
                     ],
                   ),
                 ),
@@ -89,8 +89,13 @@ class _PresentationDetailPageState extends State<PresentationDetailPage> {
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: ElevatedButton(
-        onPressed: () {
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 30),
+        child: SizedBox(
+          width: 150,
+          height: 40,
+          child: ElevatedButton(
+          onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const MenuPage()),
@@ -106,6 +111,8 @@ class _PresentationDetailPageState extends State<PresentationDetailPage> {
             onPrimary: Colors.black,
             textStyle:
                 const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+        )
+        )
       ),
     );
   }

@@ -88,13 +88,16 @@ class _SemOneVerboPageState extends State<SemOneVerboPage> {
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
               children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                ),
                const Card(
                   elevation: 3,
                   color: Colors.white,
                   child: Center(
                     child: Text('VERBOS PERSONALES',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
+                            fontWeight: FontWeight.bold, fontSize: 23),
                         textAlign: TextAlign.center),
                   ),
                 ),
@@ -156,7 +159,7 @@ class _SemOneVerboPageState extends State<SemOneVerboPage> {
           ),
 
           Positioned(
-              bottom: 20,
+              bottom: 60,
               left: 0,
               right: 0,
               child: Row(

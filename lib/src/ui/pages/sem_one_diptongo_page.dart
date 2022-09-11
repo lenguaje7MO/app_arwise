@@ -88,13 +88,16 @@ class _SemOneDiptongoPageState extends State<SemOneDiptongoPage> {
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
               children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                ),
                const Card(
                   elevation: 3,
                   color: Colors.white,
                   child: Center(
                     child: Text('EL DIPTONGO',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
+                            fontWeight: FontWeight.bold, fontSize: 30),
                         textAlign: TextAlign.center),
                   ),
                 ),
@@ -157,7 +160,7 @@ class _SemOneDiptongoPageState extends State<SemOneDiptongoPage> {
           ),
 
           Positioned(
-              bottom: 20,
+              bottom: 60,
               left: 0,
               right: 0,
               child: Row(

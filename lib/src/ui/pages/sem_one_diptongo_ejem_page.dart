@@ -87,13 +87,16 @@ class _SemOneDiptongoEjemPageState extends State<SemOneDiptongoEjemPage> {
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
               children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                ),
                const Card(
                   elevation: 3,
                   color: Colors.white,
                   child: Center(
                     child: Text('EJEMPLOS',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
+                            fontWeight: FontWeight.bold, fontSize: 23),
                         textAlign: TextAlign.center),
                   ),
                 ),
@@ -156,7 +159,7 @@ class _SemOneDiptongoEjemPageState extends State<SemOneDiptongoEjemPage> {
           ),
 
           Positioned(
-              bottom: 20,
+              bottom: 60,
               left: 0,
               right: 0,
               child: Row(

@@ -38,8 +38,8 @@ class _PresentationPageState extends State<PresentationPage> {
               ),
             ),
             SizedBox(
-              height:100,
-              width: 100,
+              height:150,
+              width: 150,
               child:Image.asset('assets/img/logos/logo.png'),
             ),
             Row(
@@ -70,23 +70,31 @@ class _PresentationPageState extends State<PresentationPage> {
         ),
       ),
       floatingActionButtonLocation:FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: ElevatedButton(
-        onPressed: (){
+      floatingActionButton:Padding(
+        padding: const EdgeInsets.only(bottom: 30),
+        child: SizedBox(
+          width: 150,
+          height: 40,
+          child: ElevatedButton(
+          onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const PresentationDetailPage()),
           );
         },
-        child:const Text('PLAY'),
-          style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25.0),
-            side: const BorderSide(width: 4.0, color: Colors.black),
-          ),
-          primary: Colors.red,
-          onPrimary: Colors.black,
-          textStyle:const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-      ),
+        child: const Text('PLAY'),
+        style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25.0),
+              side: const BorderSide(width: 4.0, color: Colors.black),
+            ),
+            primary: Colors.red,
+            onPrimary: Colors.black,
+            textStyle:
+                const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+        )
+        )
+      )
     );
   }
 }

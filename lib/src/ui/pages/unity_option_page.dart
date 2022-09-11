@@ -51,15 +51,17 @@ class _UnityOptionPageState extends State<UnityOptionPage> {
         backgroundColor: Color(0xfffc2cef3),
         body: Stack(children: [
           Center(
-            child: Container(
+            child:Padding(
+              padding: EdgeInsets.only(top: 60),
+              child: Container(
               width: 280,
               height: MediaQuery.of(context).size.height * 0.6,
               child: GridView.count(
                 crossAxisCount: 2,
                 childAspectRatio: 3,
                 shrinkWrap: true,
-                mainAxisSpacing: 18,
-                crossAxisSpacing: 5,
+                mainAxisSpacing: 40,
+                crossAxisSpacing: 8,
                 scrollDirection: Axis.vertical,
                 padding: const EdgeInsets.only(
                     left: 5, right: 5, top: 10, bottom: 5),
@@ -76,10 +78,11 @@ class _UnityOptionPageState extends State<UnityOptionPage> {
                   button('SEMANA 10',10),
                 ],
               ),
-            ),
+            )
+            )
           ),
           Positioned(
-            top: 40,
+            top: 80,
             left: MediaQuery.of(context).size.width * 0.2,
             right: MediaQuery.of(context).size.width * 0.2,
             child: SizedBox(
@@ -134,7 +137,7 @@ class _UnityOptionPageState extends State<UnityOptionPage> {
             ),
           ),
           Positioned(
-              bottom: 30,
+              bottom: 100,
               left: MediaQuery.of(context).size.width * 0.3,
               right: MediaQuery.of(context).size.width * 0.3,
               child: SizedBox(

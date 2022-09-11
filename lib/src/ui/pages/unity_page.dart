@@ -87,11 +87,17 @@ class _UnityPageState extends State<UnityPage> {
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
               children: [
+                SizedBox(height:50),
                 button('UNIDAD 1', 1),
+                SizedBox(height:14),
                 button('UNIDAD 2', 2),
+                SizedBox(height:14),
                 button('UNIDAD 3', 3),
+                SizedBox(height:14),
                 button('UNIDAD 4', 4),
+                SizedBox(height:14),
                 button('UNIDAD 5', 5),
+                SizedBox(height:14),
                 button('UNIDAD 6', 6),
               ],
             ),
@@ -153,7 +159,7 @@ class _UnityPageState extends State<UnityPage> {
             child: const Icon(Icons.brightness_1, color: Colors.yellow),
           ),
           Positioned(
-              bottom: 20,
+              bottom: 100,
               left: 0,
               right: 0,
               child: Row(
