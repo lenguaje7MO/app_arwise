@@ -63,10 +63,10 @@ class _PresentationDetailPageState extends State<PresentationDetailPage> {
               ],
             ),
           ),
-          const Positioned(
+           Positioned(
             bottom: 0,
             left: 0,
-            child: SizedBox(
+            child: const SizedBox(
               width: 50,
               height: 350,
               child: VerticalDivider(
@@ -74,10 +74,10 @@ class _PresentationDetailPageState extends State<PresentationDetailPage> {
                 thickness: 3,
               ),
             )),
-          const Positioned(
+          Positioned(
             top: 0,
             right: 0,
-            child: SizedBox(
+            child: const SizedBox(
               width: 50,
               height: 350,
               child: VerticalDivider(
