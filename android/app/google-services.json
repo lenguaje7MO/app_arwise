@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "98402827891",
+    "project_id": "arwise-437b6",
+    "storage_bucket": "arwise-437b6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98402827891:android:a280b706d1fc1b11203406",
+        "android_client_info": {
+          "package_name": "com.unephem.arwise.app_arwise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "98402827891-0ukeuekvmantoe5buqvk445sefram3s2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-jxLjy7pv0FZVWyxCJtYJmwfXtXcgJFA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "98402827891-0ukeuekvmantoe5buqvk445sefram3s2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

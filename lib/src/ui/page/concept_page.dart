@@ -1,49 +1,26 @@
-import 'package:app_arwise/src/ui/pages/menu_page.dart';
-import 'package:app_arwise/src/ui/pages/sem_one_diptongo_ejem_page.dart';
-import 'package:app_arwise/src/ui/pages/unity_desc_page.dart';
+import 'package:app_arwise/src/domain/class/content.dart';
+import 'package:app_arwise/src/ui/page/example_page.dart';
 import 'package:flutter/material.dart';
 
-class SemOneDiptongoPage extends StatefulWidget {
-  const SemOneDiptongoPage();
+class ConceptPage extends StatefulWidget {
+  Content content;
+  ConceptPage({required this.content});
 
   @override
-  State<SemOneDiptongoPage> createState() => _SemOneDiptongoPageState();
+  State<ConceptPage> createState() => _ConceptPageState();
 }
 
-class _SemOneDiptongoPageState extends State<SemOneDiptongoPage> {
+class _ConceptPageState extends State<ConceptPage> {
   Widget button(String title, int idUnidad) {
     String titleUnidad = '';
     String descriptionUnidad = '';
-    if (idUnidad == 1) {
-      titleUnidad = 'Observación y Razonamiento';
-      descriptionUnidad = 'Escribir descripciones organizadas y con vocabulario especí­fico relativo al ser, objeto, lugar o hecho que se describe e integrarlas en producciones escritas';
-    }
-    if (idUnidad == 2) {
-      titleUnidad = 'Noticias que cuentan';
-      descriptionUnidad = '';
-    }
-    if (idUnidad == 3) {
-      titleUnidad = 'PASO A PASO';
-      descriptionUnidad = '';
-    }
-    if (idUnidad == 4) {
-      titleUnidad = 'Aprendamos con la enciclopedia';
-      descriptionUnidad = '';
-    }
-    if (idUnidad == 5) {
-      titleUnidad = 'Lectura de una reseña';
-      descriptionUnidad = '';
-    }
-    if (idUnidad == 6) {
-      titleUnidad = 'Describamos el mundo y sus personajes';
-      descriptionUnidad = '';
-    }
 
     return Container(
       height: 50,
       margin: const EdgeInsets.only(top: 10, bottom: 10, left: 80, right: 80),
       child: ElevatedButton(
         onPressed: () {
+          /*
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -52,6 +29,7 @@ class _SemOneDiptongoPageState extends State<SemOneDiptongoPage> {
                     title: titleUnidad,
                     description: descriptionUnidad)),
           );
+          */
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,32 +67,37 @@ class _SemOneDiptongoPageState extends State<SemOneDiptongoPage> {
               scrollDirection: Axis.vertical,
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.05,
+                  height: MediaQuery.of(context).size.height * 0.09,
                 ),
-               const Card(
+                Card(
                   elevation: 3,
                   color: Colors.white,
                   child: Center(
-                    child: Text('EL DIPTONGO',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 30),
+                    child: Text(widget.content.title.toString(),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 25),
                         textAlign: TextAlign.center),
                   ),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.05,
-    
                 ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.65,
+                  child:Image.network(
+                  widget.content.urlConcept.toString(),
+                )),
+                /*
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.65,
                   width: double.infinity,
                   child: Image.asset('assets/img/logos/img_diptongo.png'),
-                ),
+                ),*/
               ],
             ),
           ),
           Positioned(
-            top:0,
+            top: 0,
             left: 0,
             child: SizedBox(
               height: 80,
@@ -123,7 +106,7 @@ class _SemOneDiptongoPageState extends State<SemOneDiptongoPage> {
             ),
           ),
           Positioned(
-            top:0,
+            top: 0,
             right: 0,
             child: SizedBox(
               height: 80,
@@ -132,7 +115,7 @@ class _SemOneDiptongoPageState extends State<SemOneDiptongoPage> {
             ),
           ),
           Positioned(
-            bottom:0,
+            bottom: 0,
             left: 0,
             child: SizedBox(
               height: 80,
@@ -141,7 +124,7 @@ class _SemOneDiptongoPageState extends State<SemOneDiptongoPage> {
             ),
           ),
           Positioned(
-            top:0,
+            top: 0,
             right: 0,
             child: SizedBox(
               height: 80,
@@ -150,7 +133,7 @@ class _SemOneDiptongoPageState extends State<SemOneDiptongoPage> {
             ),
           ),
           Positioned(
-            bottom:0,
+            bottom: 0,
             right: 0,
             child: SizedBox(
               height: 80,
@@ -158,7 +141,6 @@ class _SemOneDiptongoPageState extends State<SemOneDiptongoPage> {
               child: Image.asset('assets/img/logos/esquina_azul.png'),
             ),
           ),
-
           Positioned(
               bottom: 60,
               left: 0,
@@ -184,17 +166,19 @@ class _SemOneDiptongoPageState extends State<SemOneDiptongoPage> {
                   ),
                   ElevatedButton(
                     onPressed: () {
+                      
                       Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SemOneDiptongoEjemPage()),
-                    );                      
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ExamplePage(content: widget.content)),
+                      );
+                      
                     },
-                    child: Icon(Icons.play_arrow,size: 40),
+                    child: Icon(Icons.play_arrow, size: 40),
                     style: ElevatedButton.styleFrom(
                         shape: CircleBorder(),
-                        primary: Colors.red, 
-                        onPrimary:Colors.black,
+                        primary: Colors.red,
+                        onPrimary: Colors.black,
                         textStyle: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20)),
                   ),

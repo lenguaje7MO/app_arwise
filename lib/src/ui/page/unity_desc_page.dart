@@ -1,19 +1,19 @@
-import 'package:app_arwise/src/ui/pages/unity_option_page.dart';
-import 'package:app_arwise/src/ui/pages/unity_page.dart';
+import 'package:app_arwise/src/domain/class/unity.dart';
+import 'package:app_arwise/src/ui/page/unity_option_page.dart';
+import 'package:app_arwise/src/ui/page/unity_page.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class UnityDescPage extends StatefulWidget {
-  final int idUnity;
-  final String title;
-  final String description;
-  const UnityDescPage(
-      {required this.idUnity, required this.title, required this.description});
+  Unity unity;
+  UnityDescPage({Key? key, required this.unity}) : super(key: key);
 
   @override
   State<UnityDescPage> createState() => _UnityDescPageState();
 }
 
 class _UnityDescPageState extends State<UnityDescPage> {
+
   Widget button(String title) {
     return Container(
       height: 50,
@@ -64,26 +64,26 @@ class _UnityDescPageState extends State<UnityDescPage> {
             child: SizedBox(
               width: MediaQuery.of(context).size.width * 1,
               height: MediaQuery.of(context).size.height * 0.60,
-              child: Column(
+              child:SingleChildScrollView(
+                child:  Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [ 
+                children: [
                   Card(
                     elevation: 10,
                     child: Padding(
                       padding: const EdgeInsets.only(
                           left: 50, right: 50, top: 5, bottom: 5),
-                      child: Text('UNIDAD ${widget.idUnity}',
+                      child: Text(widget.unity.title.toString(),
                           style: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 35)),
                     ),
                   ),
-                  
                   Padding(
                     padding: const EdgeInsets.only(
-                        left: 10, right: 10, top: 10, bottom:30),
+                        left: 10, right: 10, top: 10, bottom: 30),
                     child: Column(
                       children: [
-                        Text(widget.title,
+                        Text(widget.unity.titleUnit.toString(),
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 45,
@@ -93,28 +93,32 @@ class _UnityDescPageState extends State<UnityDescPage> {
                     ),
                   ),
                   Padding(
-                    padding:const EdgeInsets.only(left: 40,right: 40) ,
-                    child: RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      children: <TextSpan>[
-                        const TextSpan(
-                            text: 'Destreza: ',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
-                                color: Colors.black)),
-                        TextSpan(
-                            text: widget.description,
-                            style: const TextStyle(
-                                color: Colors.black, fontSize: 25)),
-                      ],
-                    ),
-                  )
-                  )
+                      padding: const EdgeInsets.only(left: 40, right: 40),
+                      child: RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          children: <TextSpan>[
+                            const TextSpan(
+                                text: 'Destreza: ',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                     fontSize: 25,
+                                    color: Colors.black)),
+                            TextSpan(
+                                text: widget.unity.titleDetail,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  //fontSize: 12,
+                                   fontSize: 25
+                                )),
+                          ],
+                        ),
+                      ))
                 ],
               ),
-            ),
+           
+           
+              ) ),
           ),
           Positioned(
             bottom: 0,
@@ -148,7 +152,7 @@ class _UnityDescPageState extends State<UnityDescPage> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const UnityPage()),
+                            builder: (context) => const UnityPage()),
                       );
                     },
                     child: const Text('BACK <'),
@@ -167,10 +171,10 @@ class _UnityDescPageState extends State<UnityDescPage> {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                          UnityOptionPage(idUnity: widget.idUnity)));
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  UnityOptionPage(unity: widget.unity)));
                     },
                     child: const Text('PLAY'),
                     style: ElevatedButton.styleFrom(

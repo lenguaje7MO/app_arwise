@@ -1,5 +1,8 @@
-import 'package:app_arwise/src/ui/pages/menu_page.dart';
-import 'package:app_arwise/src/ui/pages/unity_desc_page.dart';
+import 'package:app_arwise/src/domain/class/unity.dart';
+import 'package:app_arwise/src/ui/page/menu_page.dart';
+import 'package:app_arwise/src/ui/page/unity_desc_page.dart';
+import 'package:app_arwise/src/ui/widgets/loader.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class UnityPage extends StatefulWidget {
@@ -10,66 +13,83 @@ class UnityPage extends StatefulWidget {
 }
 
 class _UnityPageState extends State<UnityPage> {
-  Widget button(String title, int idUnidad) {
-    String titleUnidad = '';
-    String descriptionUnidad = '';
-    if (idUnidad == 1) {
-      titleUnidad = 'Observación y Razonamiento';
-      descriptionUnidad = 'Escribir descripciones organizadas y con vocabulario especí­fico relativo al ser, objeto, lugar o hecho que se describe e integrarlas en producciones escritas';
-    }
-    if (idUnidad == 2) {
-      titleUnidad = 'Noticias que cuentan';
-      descriptionUnidad = '';
-    }
-    if (idUnidad == 3) {
-      titleUnidad = 'PASO A PASO';
-      descriptionUnidad = '';
-    }
-    if (idUnidad == 4) {
-      titleUnidad = 'Aprendamos con la enciclopedia';
-      descriptionUnidad = '';
-    }
-    if (idUnidad == 5) {
-      titleUnidad = 'Lectura de una reseña';
-      descriptionUnidad = '';
-    }
-    if (idUnidad == 6) {
-      titleUnidad = 'Describamos el mundo y sus personajes';
-      descriptionUnidad = '';
-    }
+  List<Unity> listUnity = [];
+  bool loadData = false;
 
-    return Container(
-      height: 50,
-      margin: const EdgeInsets.only(top: 10, bottom: 10, left: 80, right: 80),
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => UnityDescPage(
-                    idUnity: idUnidad,
-                    title: titleUnidad,
-                    description: descriptionUnidad)),
-          );
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text(' '),
-            Text(title),
-            const Icon(Icons.arrow_right)
-          ],
+  @override
+  void initState() {
+    loadDataUnity();
+    super.initState();
+  }
+
+  void loadDataUnity() async {
+    loadData = true;
+    setState(() {});
+
+    CollectionReference collRefUnits =
+        FirebaseFirestore.instance.collection('units');
+    collRefUnits
+        .orderBy('id')
+        .get()
+        .then((value) => {
+              // ignore: avoid_function_literals_in_foreach_calls
+              value.docs.forEach((element) {
+                print(element.data());
+                listUnity.add(
+                      Unity(
+                        idDocument: element.id,
+                        id: element['id'], 
+                        title: element['title'],
+                        titleUnit: element['titleUnit'],
+                        titleDetail: element['titleDetail']));
+              })
+            })
+        .whenComplete(() => {
+              loadData = false,
+              setState(() {}),
+            })
+        // ignore: argument_type_not_assignable_to_error_handler
+        .catchError((err) => {
+              loadData = false,
+              setState(() {}),
+            });
+  }
+
+  Widget button(Unity unity) {
+    return Padding(
+      padding:(unity.id==1)
+      ? const EdgeInsets.only(top: 30, bottom: 14)
+      : const EdgeInsets.only(top: 14, bottom: 14),
+      child: Container(
+        height: 50,
+        margin: const EdgeInsets.only(top: 10, bottom: 10, left: 80, right: 80),
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => UnityDescPage(unity:unity)),
+            );
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(' '),
+              Text(unity.title.toString()),
+              const Icon(Icons.arrow_right)
+            ],
+          ),
+          style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25.0),
+                side: const BorderSide(width: 3.0, color: Colors.black),
+              ),
+              primary: Colors.white,
+              onPrimary: Colors.black,
+              textStyle:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
         ),
-        style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25.0),
-              side: const BorderSide(width: 3.0, color: Colors.black),
-            ),
-            primary: Colors.white,
-            onPrimary: Colors.black,
-            textStyle:
-                const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
       ),
     );
   }
@@ -81,27 +101,15 @@ class _UnityPageState extends State<UnityPage> {
       body: Stack(
         children: [
           SizedBox(height: MediaQuery.of(context).size.height * 1),
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height * 0.80,
-            child: ListView(
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              children: [
-                SizedBox(height:50),
-                button('UNIDAD 1', 1),
-                SizedBox(height:14),
-                button('UNIDAD 2', 2),
-                SizedBox(height:14),
-                button('UNIDAD 3', 3),
-                SizedBox(height:14),
-                button('UNIDAD 4', 4),
-                SizedBox(height:14),
-                button('UNIDAD 5', 5),
-                SizedBox(height:14),
-                button('UNIDAD 6', 6),
-              ],
-            ),
-          ),
+            child: (loadData)
+                ? loader()
+                : ListView.builder(
+                    itemCount: listUnity.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return button(listUnity[index]);
+                    })),
           Positioned(
             top: MediaQuery.of(context).size.height * 0.25,
             right: 5,

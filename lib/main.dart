@@ -1,7 +1,15 @@
-import 'package:app_arwise/src/ui/pages/presentation_page.dart';
+import 'package:app_arwise/firebase_options.dart';
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+import 'src/ui/page/presentation_page.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -15,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: PresentationPage(),
+      home: const PresentationPage(),
     );
   }
 }

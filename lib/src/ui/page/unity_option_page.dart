@@ -1,25 +1,72 @@
-import 'package:app_arwise/src/ui/pages/unity_week_page.dart';
+import 'package:app_arwise/src/domain/class/unity.dart';
+import 'package:app_arwise/src/domain/class/week.dart';
+import 'package:app_arwise/src/ui/page/unity_week_page.dart';
+import 'package:app_arwise/src/ui/widgets/loader.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class UnityOptionPage extends StatefulWidget {
-  final int idUnity;
-  const UnityOptionPage({required this.idUnity});
+  Unity unity;
+  UnityOptionPage({required this.unity});
 
   @override
   State<UnityOptionPage> createState() => _UnityOptionPageState();
 }
 
 class _UnityOptionPageState extends State<UnityOptionPage> {
-  Widget button(String title,int idWeek) {
-    return Container(
+  bool loadData = false;
+  List<Week> listWeek = [];
+
+  @override
+  void initState() {
+    loadDataWeek();
+    super.initState();
+  }
+
+  void loadDataWeek() async {
+    loadData = true;
+    setState(() {});
+
+    CollectionReference collRefUnits =
+        FirebaseFirestore.instance
+        .collection('units')
+        .doc(widget.unity.idDocument)
+        .collection('weeks');
+
+    collRefUnits
+        .orderBy('id')
+        .get()
+        .then((value) => {
+              // ignore: avoid_function_literals_in_foreach_calls
+              value.docs.forEach((element) {
+                listWeek.add(Week(
+                    idDocument: element.id,
+                    id: element['id'],
+                    title: element['title']));
+              })
+            })
+        .whenComplete(() => {
+              print(listWeek.length),
+              loadData = false,
+              setState(() {}),
+            })
+        // ignore: argument_type_not_assignable_to_error_handler
+        .catchError((err) => {
+              loadData = false,
+              setState(() {}),
+            });
+  }
+
+  Widget button(Week week) {
+    return SizedBox(
       height: 10,
       child: ElevatedButton(
         onPressed: () {
-          if (widget.idUnity == 1 && idWeek==1) {
+          if (widget.unity.id == 1 && week.id == 1) {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => const UnityWeekPage()),
+              MaterialPageRoute(builder: (context) => 
+              UnityWeekPage(unity: widget.unity, week: week)),
             );
           }
         },
@@ -28,7 +75,7 @@ class _UnityOptionPageState extends State<UnityOptionPage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             const Text(' '),
-            Text(title),
+            Text(week.title.toString()),
             const Icon(Icons.arrow_right)
           ],
         ),
@@ -48,39 +95,28 @@ class _UnityOptionPageState extends State<UnityOptionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xfffc2cef3),
+        backgroundColor: const Color(0xfffc2cef3),
         body: Stack(children: [
           Center(
-            child:Padding(
-              padding: EdgeInsets.only(top: 60),
-              child: Container(
-              width: 280,
-              height: MediaQuery.of(context).size.height * 0.6,
-              child: GridView.count(
-                crossAxisCount: 2,
-                childAspectRatio: 3,
-                shrinkWrap: true,
-                mainAxisSpacing: 40,
-                crossAxisSpacing: 8,
-                scrollDirection: Axis.vertical,
-                padding: const EdgeInsets.only(
-                    left: 5, right: 5, top: 10, bottom: 5),
-                children: [
-                  button('SEMANA 1',1),
-                  button('SEMANA 2',2),
-                  button('SEMANA 3',3),
-                  button('SEMANA 4',4),
-                  button('SEMANA 5',5),
-                  button('SEMANA 6',6),
-                  button('SEMANA 7',7),
-                  button('SEMANA 8',8),
-                  button('SEMANA 9',9),
-                  button('SEMANA 10',10),
-                ],
-              ),
-            )
-            )
-          ),
+            child: Padding(
+                padding: const EdgeInsets.only(top: 60),
+                child: SizedBox(
+                  width: 280,
+                  height: MediaQuery.of(context).size.height * 0.6,
+                  child:(loadData) 
+                  ?loader()
+                  :GridView.builder(
+                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: 200,
+                        childAspectRatio: 5 / 2,
+                        crossAxisSpacing: 8,
+                        mainAxisSpacing: 40
+                    ),
+                    itemCount: listWeek.length,
+                    itemBuilder: (BuildContext ctx, index) {
+                      return button(listWeek[index]);
+                    })
+                ))),
           Positioned(
             top: 80,
             left: MediaQuery.of(context).size.width * 0.2,
@@ -91,7 +127,7 @@ class _UnityOptionPageState extends State<UnityOptionPage> {
                 elevation: 10,
                 color: const Color(0xfffcd24f),
                 child: Center(
-                  child: Text('UNIDAD ${widget.idUnity}',
+                  child: Text(widget.unity.title.toString(),
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 23),
                       textAlign: TextAlign.center),

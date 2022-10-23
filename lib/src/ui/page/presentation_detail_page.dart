@@ -1,4 +1,5 @@
-import 'package:app_arwise/src/ui/pages/menu_page.dart';
+
+import 'package:app_arwise/src/ui/page/menu_page.dart';
 import 'package:flutter/material.dart';
 
 class PresentationDetailPage extends StatefulWidget {
